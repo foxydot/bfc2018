@@ -1,0 +1,356 @@
+@media only screen and (min-width: 1024px) {
+
+  /* # Defaults
+  ---------------------------------------------------------------------------------------------------- */
+  body{
+    .site-container{
+    }
+  }
+
+  /* # Structure
+  ---------------------------------------------------------------------------------------------------- */
+
+
+
+  /* ## Column Widths and Positions
+--------------------------------------------- */
+
+  /* ### Wrapping div for .content and .sidebar-primary */
+  .content-sidebar-sidebar .content-sidebar-wrap,
+  .sidebar-content-sidebar .content-sidebar-wrap,
+  .sidebar-sidebar-content .content-sidebar-wrap {
+  }
+
+  .content-sidebar-sidebar .content-sidebar-wrap {
+    float: left;
+  }
+
+  .sidebar-content-sidebar .content-sidebar-wrap,
+  .sidebar-sidebar-content .content-sidebar-wrap {
+    float: right;
+  }
+
+  /* ### Content */
+
+  .content {
+    float: right;
+    order: 2;
+  }
+
+  .content-sidebar .content,
+  .content-sidebar-sidebar .content,
+  .sidebar-content-sidebar .content {
+    float: left;
+    order: 1;
+  }
+
+  .content-sidebar-sidebar .content,
+  .sidebar-content-sidebar .content,
+  .sidebar-sidebar-content .content {
+  }
+
+  .full-width-content .content {
+    width: 100%;
+  }
+
+  /* ### Primary Sidebar */
+
+  .sidebar-primary {
+    float: right;
+  }
+
+  .sidebar-content .sidebar-primary,
+  .sidebar-sidebar-content .sidebar-primary {
+    float: left;
+    order: 1;
+    width: 30%;
+  }
+
+  /* ### Secondary Sidebar */
+
+  .sidebar-secondary {
+    float: left;
+  }
+
+  .content-sidebar-sidebar .sidebar-secondary {
+    float: right;
+  }
+
+  /* # Common
+  ---------------------------------------------------------------------------------------------------- */
+
+  /* # Widgets
+  ---------------------------------------------------------------------------------------------------- */
+
+  /* # Plugins
+  ---------------------------------------------------------------------------------------------------- */
+
+  /* # Site Header
+  ---------------------------------------------------------------------------------------------------- */
+
+  .site-header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 900;
+  }
+
+  .site-header>.wrap>.container{
+    position: relative;
+  }
+
+  /* ## Title Area
+  --------------------------------------------- */
+
+  .title-area {
+    float: left;
+    padding: 10px 0;
+  }
+
+  .header-image .title-area {
+    margin: 0 auto;
+    width: 40%;
+    padding: 0;
+  }
+
+  .header-full-width .title-area {
+    float: left;
+  }
+
+
+  /* Logo, hide text */
+
+
+  .header-image .site-title > a {
+  }
+
+  .site-description {
+    font-size: 16px;
+    font-size: 1.6rem;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+
+  .site-description,
+  .site-title {
+    margin-bottom: 0;
+  }
+
+
+
+  .page-title-area {
+    margin-top: 200px;
+    background: $white;
+    .banner {
+      .texturize {
+        .gradient {
+          min-height: 400px;
+        }
+      }
+    }
+  }
+
+  .page-title-area{
+    .banner{
+      .wrap{
+        .gradient {
+          min-height: 450px;
+        }
+      }
+    }
+  }
+
+
+
+  /* # Nav
+  ---------------------------------------------------------------------------------------------------- */
+
+  /* # Content
+  ----------------------------------------------------------------------------------------------------- */
+  .entry {
+    padding: 2em;
+  }
+  
+  div.building-row {
+    div.building-item {
+      width:45%;
+      display:inline-block;
+      padding: 0 10px;
+      padding-bottom:10px;
+      float:left;
+      .fa {
+        padding-right:5px;
+      }
+    }
+    div.building-item-list {
+      padding-top:10px;
+      p { 
+        font-size: .8em;
+        margin-bottom: 12px;
+        }
+      h2 {
+        font-size: 1em;
+      }
+    }
+  }
+  .building {
+    h2.padding {
+      padding-top:20px; 
+    }
+    h3 {
+      padding-top: 20px;
+    }
+  }
+  
+
+  /* # Sidebars
+  ---------------------------------------------------------------------------------------------------- */
+
+  .sidebar {
+    .widget,
+    .sidebarcontent  {
+      padding: 2em 0;
+    }
+  }
+
+
+  /* # Footer Widgets
+---------------------------------------------------------------------------------------------------- */
+
+  /* # Footer Widgets
+---------------------------------------------------------------------------------------------------- */
+
+  .footer-widgets {
+    clear: both;
+    font-size: 18px;
+    font-size: 1.8rem;
+  }
+
+  .footer-widgets {
+    clear: both;
+    padding: 0;
+    .widget-area{
+      padding: 2em 0;
+    }
+
+    .widget {
+    }
+    .connected-social{
+      .social-media{
+        margin: 1rem 0;
+        float: none;
+        margin: 0 auto;
+        a,a:hover{
+          float: none;
+          display: inline-block;
+          &:before{
+            opacity: 1;
+          }
+        }
+        a.fa{
+          border-radius: 100%;
+          font-size: 2rem;
+          height: 2em;
+          line-height: 2;
+          margin: 10px;
+          width: 2em;
+        }
+        a.fa.last-child{
+          margin-right: 0;
+        }
+        a.fa:hover{
+          background-color: $offwhite;
+        }
+
+        a.fa-facebook:hover{
+          background-color:$facebook;
+        }
+        a.fa-twitter:hover{
+          background-color:$twitter;
+        }
+        a.fa-pinterest:hover{
+          background-color:$pinterest;
+        }
+        a.fa-google-plus:hover{
+          background-color:$google;
+        }
+        a.fa-linkedin:hover{
+          background-color:$linkedin;
+        }
+        a.fa-instagram:hover{
+          background-color:$instagram;
+        }
+        a.fa-tumblr:hover{
+          background-color:$tumblr;
+        }
+        a.fa-reddit:hover{
+          background-color:$reddit;
+        }
+        a.fa-flickr:hover{
+          background-color:$flickr;
+        }
+        a.fa-youtube:hover{
+          background-color:$youtube;
+        }
+        a.fa-vimeo-square:hover{
+          background-color:$vimeo;
+        }
+        a.fa-vine:hover{
+          background-color:$vine;
+        }
+        a.fa-share-alt:hover{
+          background-color:$sharethis;
+        }
+        a.fa-envelope:hover{
+          background-color:$contact;
+        }
+        a.fa-rss:hover{
+          background-color:$rss;
+        }
+      }
+    }
+    .search-form input:focus {
+      border: 0 solid #ddd;
+    }
+    .widget.widget_nav_menu{
+      text-align: left;
+      ul.menu{
+        font-size: 0.8em;
+        width: 90%;
+        margin: 0 auto;
+        -moz-column-count: 6;
+        -moz-column-gap: 30px;
+        -webkit-column-count: 5;
+        -webkit-column-gap: 30px;
+        column-count: 5;
+        column-gap: 30px;
+        >li{
+          -webkit-column-break-inside: avoid;
+          page-break-inside: avoid;
+          break-inside: avoid;
+          >a{
+            text-transform: uppercase;
+            font-weight: 700;
+          }
+          .sub-menu{
+            margin-bottom: 1em;
+            li{
+              margin-left: 0;
+            }
+            .sub-menu{
+              display: none;
+            }
+          }
+        }
+      }
+    }
+  }
+
+
+  /* # Site Footer
+  ---------------------------------------------------------------------------------------------------- */
+
+  .site-footer {
+  }
+}

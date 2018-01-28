@@ -1,0 +1,39 @@
+@media only screen and (min-width: 768px) {
+  /* Accessible Menu
+  --------------------------------------------- */
+  .wrap{
+    max-width: 1170px;
+    margin: 0 auto;
+  }
+  .site-inner {
+    margin-top: 9em;
+  }
+
+  .nav-primary{
+    position: absolute;
+  }
+
+  .menu .menu-item:focus {
+    position: static;
+  }
+
+  .menu .menu-item > a:focus + ul.sub-menu,
+  .menu .menu-item.sfHover > ul.sub-menu {
+    left: auto;
+    opacity: 1;
+  }
+
+  .menu-toggle,
+  .sub-menu-toggle {
+    display: none;
+    visibility: hidden;
+  }
+
+
+  /* # Site Footer
+  ---------------------------------------------------------------------------------------------------- */
+
+  .site-footer {
+    font-size: 0.8em;
+  }
+}

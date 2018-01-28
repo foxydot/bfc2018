@@ -1,0 +1,159 @@
+.site-header>.container{position: relative;}
+.bannercontent{
+  color: $dkgrey;
+}
+.addborder{
+  border: 0.25em solid $white;
+}
+.nobr{
+  white-space: nowrap;
+}
+.nav-buttons{
+  float: left;
+  #nav-login-btn, #nav-signup-btn {
+    color: $dkgrey;
+    background: $offwhite;
+    border: none;
+    border-radius: 0;
+    margin-left: 20px;
+  }
+  #nav-signup-btn {
+     color: $offwhite;
+     background: $blue;
+   }
+}
+
+.entry-subtitle{
+  font-size: 1.6em;
+}
+i.fa{
+  margin: 0 auto;
+}
+.genesis-blog-grid {
+  article.genesis-feature, article.genesis-teaser {
+    .entry-header {
+      .featured_image_wrapper, .grid_image_wrapper {
+        text-align: center;
+        margin: 0 auto 1em;
+        display: block;
+        min-height: 22em;
+      }
+    }
+    .entry-content {
+      .readmore-button {
+        color: $offwhite;
+        background: $blue;
+        border-radius: 1.5em;
+        padding: 0 1em;
+        border: 1px solid $blue;
+        transition: all 0.5s;
+        &:hover {
+          color: $blue;
+          background: $offwhite;
+        }
+      }
+    }
+  }
+  article.genesis-feature{
+    border-bottom: 1px solid $medgrey;
+  }
+}
+
+.single-post{
+  .content-sidebar-wrap{
+    main.content{
+      border-right: 1px solid $ltgrey;
+    }
+  }
+}
+
+.menu-item.logged-in{
+    display: none;
+  }
+.logged-in .menu-item{
+  &.not-logged-in{
+    display: none;
+  }
+  &.logged-in{
+    display: inline-block;
+  }
+}
+
+.footer-widgets{
+  .widget.logo-title{
+    .widget-title{
+      background-image: url('../images/Cordata_community_Logo_Color.png');
+      background-position: left center;
+      background-size: contain;
+      background-repeat: no-repeat;
+      height: 2em;
+      display: block;
+      text-indent: -9999px;
+    }
+  }
+  .msd-connected{
+    .connected-form{
+      display: block;
+    }
+    .connected-social{
+      clear: both;
+    }
+  }
+}
+
+.archive-description{
+  display: none;
+}
+
+#gform_1{
+  .gform_body {
+    width: 50%;
+    float: left;
+    input{
+      width: 100%;
+    }
+    label{
+      display: none;
+    }
+  }
+  .gform_footer{
+    width: 50%;
+    float: left;
+    clear: none;
+    margin: 0;
+  }
+}
+
+
+.team-display-grid{
+  .team{
+    .name{
+      color: $orange;
+    }
+    .jobtitle{}
+    .team_member-contact-info{
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      margin-bottom: 2em;
+      li{
+        display: inline-block;
+        margin: 0;
+        padding: 0 0.5em;
+        a{
+          display: block;
+          background-color: $blue;
+          border-radius: 100%;
+          color: $white;
+          height: 2em;
+          width: 2em;
+          text-align: center;
+          line-height: 2;
+          &:hover{
+            background-color: rgba($blue,0.8);
+          }
+        }
+      }
+    }
+  }
+}
