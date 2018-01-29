@@ -58,7 +58,7 @@ $dkbrown: darken($brown, 20%);
 
 /* Neutrals */
 $white: #FFF;
-$offwhite: rgb(237, 246, 252);
+$offwhite: #ededed;
 $ltgrey: #CCC;
 $medgrey: #999;
 $dkgrey: #2A2B30;
@@ -67,15 +67,15 @@ $black: #000;
 /* Default Colors */
 $body_bkg: $white;
 $body_txt: $dkgrey;
-$link: $blue;
-$link_hvr: $blue;
+$link: $red;
+$link_hvr: darken($red,10%);
 $border: $ltgrey;
-$input_bkg: $offwhite;
+$input_bkg: $white;
 $input_border: $ltgrey;
-$btn_bkg: $orange;
+$btn_bkg: $red;
 $btn_txt: $white;
 $btn_border: $white;
-$btn_hvr_bkg: rgba($orange,0.8);
+$btn_hvr_bkg: rgba($red,0.8);
 $btn_hvr_txt: $white;
 $btn_hvr_border: $white;
 $btn_dis_bkg: $ltgrey;

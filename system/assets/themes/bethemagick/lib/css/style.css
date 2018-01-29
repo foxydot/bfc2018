@@ -396,12 +396,12 @@ textarea:focus,
   transition: all 0.1s ease-in-out; }
 
 a {
-  color: #4ca8df;
+  color: #f00;
   text-decoration: none; }
 
 a:focus,
 a:hover {
-  color: #4ca8df;
+  color: #cc0000;
   text-decoration: none; }
 
 p {
@@ -572,7 +572,7 @@ figure {
 input,
 select,
 textarea {
-  background-color: #edf6fc;
+  background-color: #FFF;
   border: 1px solid #CCC;
   color: #333;
   font-size: 18px;
@@ -604,7 +604,7 @@ input[type="reset"],
 input[type="submit"],
 .button,
 a.btn {
-  background-color: #f1952d;
+  background-color: #f00;
   border: 1px solid #FFF;
   color: #FFF;
   cursor: pointer;
@@ -631,7 +631,7 @@ input[type="submit"]:hover,
 .button:hover,
 a.btn:focus,
 a.btn:hover {
-  background-color: rgba(241, 149, 45, 0.8);
+  background-color: rgba(255, 0, 0, 0.8);
   color: #FFF; }
 
 .entry-content .button:focus,
@@ -1218,10 +1218,10 @@ img.alignright,
       margin: 11em auto; }
       .page-title-area .banner .wrap .gradient .bannertext .entry-title {
         font-size: 4em;
-        color: #edf6fc;
+        color: #ededed;
         text-transform: uppercase; }
         .page-title-area .banner .wrap .gradient .bannertext .entry-title a {
-          color: #edf6fc; }
+          color: #ededed; }
 
 @media only screen and (max-width: 767px) {
   .genesis-responsive-menu {
@@ -1245,7 +1245,7 @@ img.alignright,
   .sub-menu-toggle:focus,
   .sub-menu-toggle:hover {
     background: transparent;
-    color: #4ca8df;
+    color: #f00;
     border-width: 0; }
   .menu-toggle {
     line-height: 20px;
@@ -1458,7 +1458,7 @@ img.alignright,
         background: transparent;
         border: 0 none;
         clip: auto;
-        color: #4ca8df;
+        color: #f00;
         display: none;
         font-size: 1.2rem;
         height: 18px;
@@ -1525,7 +1525,7 @@ img.alignright,
           .widget_advanced_menu .menu > li.current-menu-item li:hover a:hover, .widget_advanced_menu .menu > li.current-menu-ancestor li:hover a:hover {
             text-decoration: none; }
         .widget_advanced_menu .menu > li.current-menu-item li > ul.sub-menu, .widget_advanced_menu .menu > li.current-menu-ancestor li > ul.sub-menu {
-          background: #edf6fc; }
+          background: #ededed; }
           .widget_advanced_menu .menu > li.current-menu-item li > ul.sub-menu li, .widget_advanced_menu .menu > li.current-menu-ancestor li > ul.sub-menu li {
             border-top: 2px dashed #CCC;
             padding-left: 6rem; }
@@ -1613,7 +1613,7 @@ p.entry-meta {
 .archive-pagination a:hover,
 .archive-pagination .active a {
   background-color: #4ca8df;
-  color: #edf6fc; }
+  color: #ededed; }
 
 /* ## Comments
 --------------------------------------------- */
@@ -1676,7 +1676,7 @@ p.entry-meta {
   padding: 3vw; }
 
 .footer-widgets {
-  background-color: #edf6fc;
+  background-color: #ededed;
   clear: both;
   padding: 0.5vw 0; }
   .footer-widgets a {
@@ -1706,7 +1706,7 @@ p.entry-meta {
     .footer-widgets .connected-social .social-media a.fa.last-child {
       margin-right: 0; }
     .footer-widgets .connected-social .social-media a.fa:hover {
-      background-color: #edf6fc; }
+      background-color: #ededed; }
     .footer-widgets .connected-social .social-media a.fa-facebook:hover {
       background-color: #345AA1; }
     .footer-widgets .connected-social .social-media a.fa-twitter:hover {
@@ -1774,7 +1774,7 @@ p.entry-meta {
 ---------------------------------------------------------------------------------------------------- */
 .site-footer {
   background-color: #000;
-  color: #edf6fc;
+  color: #ededed;
   font-family: 'Montserrat', sans-serif;
   text-rendering: optimizeLegibility !important;
   -webkit-font-smoothing: antialiased !important;
@@ -1805,7 +1805,7 @@ p.entry-meta {
     .site-footer .social-media a.fa.last-child {
       margin-right: 0; }
     .site-footer .social-media a.fa:hover {
-      background-color: #edf6fc; }
+      background-color: #ededed; }
     .site-footer .social-media a.fa-facebook:hover {
       background-color: #345AA1; }
     .site-footer .social-media a.fa-twitter:hover {
@@ -1866,10 +1866,10 @@ p.entry-meta {
           text-decoration: underline; }
       .sectioned-page-wrapper .section .section-body .section-footer-area {
         margin-top: 4em; }
-    .sectioned-page-wrapper .section ul, .sectioned-page-wrapper .section ol {
+    .sectioned-page-wrapper .section ul:not(.products), .sectioned-page-wrapper .section ol:not(.products) {
       margin: 0 auto 1em;
       display: block; }
-      .sectioned-page-wrapper .section ul li, .sectioned-page-wrapper .section ol li {
+      .sectioned-page-wrapper .section ul:not(.products) li, .sectioned-page-wrapper .section ol:not(.products) li {
         list-style: disc;
         text-align: left;
         margin-bottom: 0.5em;
@@ -1900,11 +1900,11 @@ p.entry-meta {
   .sectioned-page-wrapper .section.bkg-white {
     background-color: #FFF; }
   .sectioned-page-wrapper .section.bkg-offwhite {
-    background-color: #edf6fc; }
+    background-color: #ededed; }
   .sectioned-page-wrapper .section.text-dkgrey {
     color: #2A2B30; }
   .sectioned-page-wrapper .section.text-white {
-    color: #edf6fc; }
+    color: #ededed; }
   .sectioned-page-wrapper .section.text-shadow {
     text-shadow: 0 0 0.5em rgba(42, 43, 48, 0.6); }
   .sectioned-page-wrapper .section.col-odd-offwhite .column-1, .sectioned-page-wrapper .section.col-odd-offwhite .column-3 {
@@ -1944,7 +1944,7 @@ p.entry-meta {
     text-align: center; }
     .sectioned-page-wrapper .section i.icon:hover {
       background: #4ca8df;
-      color: #edf6fc; }
+      color: #ededed; }
   .sectioned-page-wrapper .section.hs-hook .section-body {
     font-weight: 500;
     color: #FFF;
@@ -1952,14 +1952,14 @@ p.entry-meta {
   .sectioned-page-wrapper a.fa.fa-angle-down {
     padding: 10px 15px;
     color: #FCFCFC;
-    border: 2px solid #edf6fc;
+    border: 2px solid #ededed;
     border-radius: 50%;
     font-size: 24px;
     margin-top: 100px;
     transition: all 0.5s; }
     .sectioned-page-wrapper a.fa.fa-angle-down:hover {
       background: #4ca8df;
-      color: #edf6fc;
+      color: #ededed;
       border: 2px solid #4ca8df; }
   .sectioned-page-wrapper .section.first-child.overlay {
     padding-top: 0; }
@@ -1973,6 +1973,53 @@ p.entry-meta {
     .sectioned-page-wrapper .section.first-child .overlay p {
       max-width: 700px;
       margin: 0 auto 1em; }
+
+.woocommerce ul.products, woocommerce-page ul.products {
+  list-style: none outside none; }
+  .woocommerce ul.products li.product, woocommerce-page ul.products li.product {
+    width: 100%;
+    text-align: center; }
+
+.woocommerce span.onsale, woocommerce-page span.onsale {
+  background-color: #f00; }
+
+.woocommerce li.product p.price, .woocommerce li.product span.price, .woocommerce div.product p.price, .woocommerce div.product span.price,
+.woocommerce #content li.product p.price,
+.woocommerce #content li.product span.price, .woocommerce #content div.product p.price, .woocommerce #content div.product span.price, woocommerce-page li.product p.price, woocommerce-page li.product span.price, woocommerce-page div.product p.price, woocommerce-page div.product span.price,
+woocommerce-page #content li.product p.price,
+woocommerce-page #content li.product span.price, woocommerce-page #content div.product p.price, woocommerce-page #content div.product span.price {
+  color: #000; }
+
+.woocommerce li.product div.images, .woocommerce div.product div.images,
+.woocommerce #content li.product div.images, .woocommerce #content div.product div.images, woocommerce-page li.product div.images, woocommerce-page div.product div.images,
+woocommerce-page #content li.product div.images, woocommerce-page #content div.product div.images {
+  width: 29%; }
+
+.woocommerce li.product div.summary, .woocommerce div.product div.summary,
+.woocommerce #content li.product div.summary, .woocommerce #content div.product div.summary, woocommerce-page li.product div.summary, woocommerce-page div.product div.summary,
+woocommerce-page #content li.product div.summary, woocommerce-page #content div.product div.summary {
+  width: 67%; }
+
+.woocommerce #respond input#submit.alt,
+.woocommerce a.button.alt,
+.woocommerce button.button.alt,
+.woocommerce input.button.alt, woocommerce-page #respond input#submit.alt,
+woocommerce-page a.button.alt,
+woocommerce-page button.button.alt,
+woocommerce-page input.button.alt {
+  background-color: #f00; }
+  .woocommerce #respond input#submit.alt:hover,
+  .woocommerce a.button.alt:hover,
+  .woocommerce button.button.alt:hover,
+  .woocommerce input.button.alt:hover, woocommerce-page #respond input#submit.alt:hover,
+  woocommerce-page a.button.alt:hover,
+  woocommerce-page button.button.alt:hover,
+  woocommerce-page input.button.alt:hover {
+    background-color: rgba(255, 0, 0, 0.8); }
+
+@media only screen and (min-width: 768px) {
+  .woocommerce ul.products li.product, woocommerce-page ul.products li.product {
+    width: 29%; } }
 
 .site-header > .container {
   position: relative; }
@@ -1990,12 +2037,12 @@ p.entry-meta {
   float: left; }
   .nav-buttons #nav-login-btn, .nav-buttons #nav-signup-btn {
     color: #2A2B30;
-    background: #edf6fc;
+    background: #ededed;
     border: none;
     border-radius: 0;
     margin-left: 20px; }
   .nav-buttons #nav-signup-btn {
-    color: #edf6fc;
+    color: #ededed;
     background: #4ca8df; }
 
 .entry-subtitle {
@@ -2011,7 +2058,7 @@ i.fa {
   min-height: 22em; }
 
 .genesis-blog-grid article.genesis-feature .entry-content .readmore-button, .genesis-blog-grid article.genesis-teaser .entry-content .readmore-button {
-  color: #edf6fc;
+  color: #ededed;
   background: #4ca8df;
   border-radius: 1.5em;
   padding: 0 1em;
@@ -2019,7 +2066,7 @@ i.fa {
   transition: all 0.5s; }
   .genesis-blog-grid article.genesis-feature .entry-content .readmore-button:hover, .genesis-blog-grid article.genesis-teaser .entry-content .readmore-button:hover {
     color: #4ca8df;
-    background: #edf6fc; }
+    background: #ededed; }
 
 .genesis-blog-grid article.genesis-feature {
   border-bottom: 1px solid #999; }
@@ -2259,7 +2306,7 @@ i.fa {
       .footer-widgets .connected-social .social-media a.fa.last-child {
         margin-right: 0; }
       .footer-widgets .connected-social .social-media a.fa:hover {
-        background-color: #edf6fc; }
+        background-color: #ededed; }
       .footer-widgets .connected-social .social-media a.fa-facebook:hover {
         background-color: #345AA1; }
       .footer-widgets .connected-social .social-media a.fa-twitter:hover {

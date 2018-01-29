@@ -31,11 +31,15 @@ if(!class_exists('MSDLab_tickets')){
         function __construct() {
             add_action('yith_wcevti_custom_option',array(&$this,'add_select'),10,2);
             add_action('yith_wcevti_custom_field',array(&$this,'custom_field_frontend'),10,4);
+
+            add_filter('woocommerce_sale_flash',array(&$this,'edit_sale_text'),10,3);
+            add_filter('loop_shop_columns', array(&$this,'loop_columns'),15);
+
         }
         //methods
         //core
         function add_select($field,$index){
-            $ret = '<option value="select" '.selected( isset( $field['_type'] ) && $field['_type'] == 'text' ) .' >'. __( 'Select', 'yith-event-tickets-for-woocommerce' ) .'</option>';
+            $ret = '<option value="select" '.selected( isset( $field['_type'] ) && $field['_type'] == 'select' ) .' >'. __( 'Select', 'yith-event-tickets-for-woocommerce' ) .'</option>';
             print $ret;
         }
 
@@ -83,8 +87,20 @@ if(!class_exists('MSDLab_tickets')){
             }
             return implode("\n",$ret);
         }
+
+//woocommerce stuff
+        function edit_sale_text($str,$post,$product){
+            $ret = preg_replace('#Sale!#i','Early Bird!',$str);
+            return $ret;
+        }
+
+        // Change number or products per row to 3
+        function loop_columns() {
+            return 3; // 3 products per row
+        }
         //util
     }
+
 }
 
 //instance
