@@ -19,7 +19,7 @@ if(!function_exists('ts_var')){
     }
 }
 
-add_action('genesis_footer','my_msdlab_trace_actions');
+//add_action('genesis_footer','my_msdlab_trace_actions');
 if(!function_exists('my_msdlab_trace_actions')) {
     function my_msdlab_trace_actions()
     {
