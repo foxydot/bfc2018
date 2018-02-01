@@ -19,12 +19,12 @@ if(!function_exists('ts_var')){
     }
 }
 
-//add_action('genesis_footer','my_msdlab_trace_actions');
+add_action('genesis_footer','my_msdlab_trace_actions');
 if(!function_exists('my_msdlab_trace_actions')) {
     function my_msdlab_trace_actions()
     {
         global $wp_filter;
         global $allowedposttags;
-        ts_var($wp_filter['genesis_header']);
+        ts_var($wp_filter['woocommerce_single_product_summary']);
     }
 }

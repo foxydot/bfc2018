@@ -1086,37 +1086,43 @@ img.alignright,
 
 /* ## Gravity Forms
 --------------------------------------------- */
-.site-inner .gform_wrapper {
+.gform_wrapper {
   margin: 0 -1em 0 0;
-  max-width: 101%; }
-  .site-inner .gform_wrapper .gform_heading .gform_description {
-    color: #4ca8df;
+  max-width: 101%;
+  font-size: 1.5em !important; }
+  .gform_wrapper .gform_heading .gform_description {
+    color: #f00;
     font-weight: 600; }
-    .site-inner .gform_wrapper .gform_heading .gform_description a {
-      color: #4ca8df; }
-  .site-inner .gform_wrapper .gform_body li.gfield {
+    .gform_wrapper .gform_heading .gform_description a {
+      color: #f00; }
+  .gform_wrapper .gform_body li.gfield {
     background: #FFF;
     margin-bottom: 0.5em; }
-    .site-inner .gform_wrapper .gform_body li.gfield label {
+    .gform_wrapper .gform_body li.gfield label {
       padding: 0 1em;
-      font-size: 0.7em;
       font-weight: 400; }
-    .site-inner .gform_wrapper .gform_body li.gfield .ginput_container input, .site-inner .gform_wrapper .gform_body li.gfield .ginput_container textarea {
-      border: 0;
+      .gform_wrapper .gform_body li.gfield label.gfield_label {
+        padding: 0;
+        font-weight: 700;
+        color: #2A2B30; }
+    .gform_wrapper .gform_body li.gfield .ginput_container input, .gform_wrapper .gform_body li.gfield .ginput_container textarea {
       background: #FFF; }
-    .site-inner .gform_wrapper .gform_body li.gfield.white {
+    .gform_wrapper .gform_body li.gfield.white {
       background: none; }
-  .site-inner .gform_wrapper .gform_footer input.button,
-  .site-inner .gform_wrapper .gform_footer input[type=submit] {
+  .gform_wrapper .gform_footer input.button,
+  .gform_wrapper .gform_footer input[type=submit] {
     width: 50%;
     display: block; }
 
-.site-inner .sidebar .gform_wrapper .gform_body li.gfield {
+.sidebar .gform_wrapper .gform_body li.gfield {
   background: #eaf3fb; }
-  .site-inner .sidebar .gform_wrapper .gform_body li.gfield .ginput_container input, .site-inner .sidebar .gform_wrapper .gform_body li.gfield .ginput_container textarea {
+  .sidebar .gform_wrapper .gform_body li.gfield .ginput_container input, .sidebar .gform_wrapper .gform_body li.gfield .ginput_container textarea {
     background: rgba(234, 243, 251, 0); }
-  .site-inner .sidebar .gform_wrapper .gform_body li.gfield.white {
+  .sidebar .gform_wrapper .gform_body li.gfield.white {
     background: none; }
+
+.gform_wrapper ul.gfield_checkbox li, .gform_wrapper ul.gfield_radio li {
+  overflow: visible !important; }
 
 /* # Site Header
 ---------------------------------------------------------------------------------------------------- */
@@ -2017,6 +2023,10 @@ woocommerce-page input.button.alt {
   woocommerce-page input.button.alt:hover {
     background-color: rgba(255, 0, 0, 0.8); }
 
+.label {
+  color: #000;
+  font-size: 1em; }
+
 @media only screen and (min-width: 768px) {
   .woocommerce ul.products li.product, woocommerce-page ul.products li.product {
     width: 29%; } }
@@ -2100,44 +2110,6 @@ i.fa {
 
 .archive-description {
   display: none; }
-
-#gform_1 .gform_body {
-  width: 50%;
-  float: left; }
-  #gform_1 .gform_body input {
-    width: 100%; }
-  #gform_1 .gform_body label {
-    display: none; }
-
-#gform_1 .gform_footer {
-  width: 50%;
-  float: left;
-  clear: none;
-  margin: 0; }
-
-.team-display-grid .team .name {
-  color: #f1952d; }
-
-.team-display-grid .team .team_member-contact-info {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  margin-bottom: 2em; }
-  .team-display-grid .team .team_member-contact-info li {
-    display: inline-block;
-    margin: 0;
-    padding: 0 0.5em; }
-    .team-display-grid .team .team_member-contact-info li a {
-      display: block;
-      background-color: #4ca8df;
-      border-radius: 100%;
-      color: #FFF;
-      height: 2em;
-      width: 2em;
-      text-align: center;
-      line-height: 2; }
-      .team-display-grid .team .team_member-contact-info li a:hover {
-        background-color: rgba(76, 168, 223, 0.8); }
 
 @media only screen and (min-width: 768px) {
   /* Accessible Menu

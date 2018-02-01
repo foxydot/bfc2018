@@ -65,16 +65,17 @@
 
 /* ## Gravity Forms
 --------------------------------------------- */
-.site-inner {
+
   .gform_wrapper {
     margin: 0 -1em 0 0;
     max-width: 101%;
+    font-size: 1.5em !important;
     .gform_heading {
       .gform_description {
-        color: $blue;
+        color: $red;
         font-weight: 600;
         a{
-          color: $blue;
+          color: $red;
         }
       }
     }
@@ -84,12 +85,15 @@
         margin-bottom: 0.5em;
         label {
           padding: 0 1em;
-          font-size: 0.7em;
           font-weight: 400;
+          &.gfield_label{
+            padding: 0;
+            font-weight: 700;
+            color: $dkgrey;
+          }
         }
         .ginput_container {
           input, textarea {
-            border: 0;
             background: $white;
           }
         }
@@ -123,4 +127,8 @@
       }
     }
   }
+
+
+.gform_wrapper ul.gfield_checkbox li, .gform_wrapper ul.gfield_radio li {
+  overflow: visible !important;
 }
