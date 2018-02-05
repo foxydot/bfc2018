@@ -27,6 +27,21 @@ if(!class_exists('MSDLab_tickets')){
             'White Tiger',
             'Woad Mare'
         );
+        private $accomodations = array(
+            'Tent(s)',
+            'RV/Popup',
+            'Offsite'
+        );
+        private $tent_size = array(
+            'Not applicable',
+            '2 Man',
+            '4 Man',
+            '6 Man',
+            '8 Man',
+            '10 Man',
+            '12 Man',
+            'My tent is a mansion I can fit armies in.'
+        );
         //construct
         function __construct() {
             add_action('yith_wcevti_custom_option',array(&$this,'add_select'),10,2);
@@ -54,9 +69,19 @@ if(!class_exists('MSDLab_tickets')){
         }
 
         function custom_field_frontend($field, $index, $row, $label){
+            ts_data($label);
+            // any notice text
+            switch($label){
+                case 'accomodations':
+                    print '<p><strong>PLEASE NOTE: </strong>If you intend to camp in an RV or popup, you are responsible for securing a campign space outside of the group loop. Please contact the <a href="https://pennsylvaniastateparks.reserveamerica.com/camping/gifford-pinchot-state-park/r/campgroundDetails.do?contractCode=PA&parkId=880306" target="_blank">Pennsylvania DCNR</a> to make your reservation and note the site number you reserve below.</p>';
+                    break;
+                case 'tent-size':
+                    print '<p>If you are bringing multiple tents (for children, etc.) please add up and approximate. (ie. Two 4-man tents: 8 man)</p>';
+                    break;
+            }
             ?>
-
 <p class="form-field _fields_customer_<?php echo $label; ?>_field ">
+
                         <?php if (!$placeholder){ ?>
     <label
         for="_fields_customer_<?php echo $row ?>_<?php echo $label; ?>"><?php echo $field['_label']; ?><?php if (isset($field['_required'])) {
