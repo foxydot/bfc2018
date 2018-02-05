@@ -1,0 +1,532 @@
+@import "_mixins.scss";
+.woocommerce,woocommerce-page {
+  ul.products {
+    list-style: none outside none;
+    li.product {
+      width: 100%;
+      text-align: center;
+    }
+  }
+  li.product,div.product,
+  #content li.product,#content div.product{
+    div.images{
+      width: 29%;
+    }
+    div.summary{
+      width: 67%;
+    }
+  }
+}
+
+.label{
+  color: $black;
+  font-size: 1em;
+}
+section.upsells.products{
+  clear: both;
+}
+
+
+/**
+ * WooCommerce CSS Variables
+ */
+
+$woocommerce:   	$medgrey;
+
+$primary:           $red;                                    // Primary color for buttons (alt)
+$primarytext:       $white;    // Text on primary color bg
+
+$secondary:         desaturate(lighten($primary, 40%), 21%);    // Secondary buttons
+$secondarytext:     desaturate(darken($secondary, 60%), 21%);   // Text on secondary color bg
+
+$highlight:         $black;//adjust-hue($primary, 150deg);               // Prices, In stock labels, sales flash
+$highlightext:      desaturate(lighten($highlight, 50%), 18%);  // Text on highlight color bg
+
+$contentbg:         #fff;                                       // Content BG - Tabs (active state)
+$subtext:           #777;                                       // small, breadcrumbs etc
+
+/**
+ * Global styles
+ */
+p.demo_store,
+.woocommerce-store-notice {
+  font-size: 1em;
+  padding: 1em 0;
+  text-align: center;
+  background-color: $primary;
+  color: $primarytext;
+  display: none;
+
+  a {
+    color: $primarytext;
+    text-decoration: underline;
+  }
+}
+
+/**
+ * Main WooCommerce styles
+ */
+.woocommerce {
+
+  /**
+   * Product Page
+   */
+  div.product {
+    span.price,
+    p.price {
+      color: $highlight;
+    }
+
+    .stock {
+      color: $highlight;
+    }
+
+    .out-of-stock {
+      color: $red;
+    }
+
+
+    div.images {
+      margin-bottom: 2em;
+
+
+      .woocommerce-product-gallery__trigger {
+
+        background: #fff;
+
+        &:before {
+          border: 2px solid #000;
+        }
+
+        &:after {
+          background: #000;
+        }
+      }
+    }
+
+    .woocommerce-tabs {
+      ul.tabs {
+
+        li {
+          border: 1px solid darken( $secondary, 10% );
+          background-color: $secondary;
+          a {
+            color: $secondarytext;
+            &:hover {
+              color: lighten( $secondarytext, 10% );
+            }
+          }
+
+          &.active {
+            background: $contentbg;
+            border-bottom-color: $contentbg;
+
+
+            &::before {
+              box-shadow: 2px 2px 0 $contentbg;
+            }
+
+            &::after {
+              box-shadow: -2px 2px 0 $contentbg;
+            }
+          }
+
+          &::before,
+          &::after {
+            border: 1px solid darken( $secondary, 10% );
+          }
+
+          &::before {
+            box-shadow: 2px 2px 0 $secondary;
+          }
+
+          &::after {
+            box-shadow: -2px 2px 0 $secondary;
+          }
+        }
+
+        &::before {
+          border-bottom: 1px solid darken( $secondary, 10% );
+        }
+      }
+    }
+  }
+
+  span.onsale {
+    background-color: $highlight;
+    color: $highlightext;
+  }
+
+  /**
+   * Product loops
+   */
+  .products ul,
+
+  ul.products li.product {
+    .price {
+      color: $highlight;
+      .from {
+        text-transform: uppercase;
+        color: rgba(desaturate($highlight, 75%), 0.5);
+      }
+    }
+  }
+
+  nav.woocommerce-pagination {
+    ul {
+      border: 1px solid darken( $secondary, 10% );
+      li {
+        border-right: 1px solid darken( $secondary, 10% );
+        span.current,
+        a:hover,
+        a:focus {
+          background: $secondary;
+          color: darken( $secondary, 40% );
+        }
+      }
+    }
+  }
+
+  /**
+   * Buttons
+   */
+  a.button,
+  button.button,
+  input.button,
+  #respond input#submit {
+    font-size: 100%;
+    margin: 0 1em 0 0;
+    line-height: 1;
+    cursor: pointer;
+    position: relative;
+    text-decoration: none;
+    overflow: visible;
+    padding: 0.618em 1em;
+    font-weight: 700;
+    border-radius: 3px;
+    left: auto;
+    color: $secondarytext;
+    background-color: $secondary;
+    border: 0;
+    white-space: nowrap;
+    display: inline-block;
+    background-image: none;
+    box-shadow: none;
+    text-shadow: none;
+
+    &.loading {
+      opacity: 0.25;
+      padding-right: 2.618em;
+
+      &::after {
+        font-family: 'WooCommerce';
+        content: '\e01c';
+        vertical-align: top;
+        -webkit-font-smoothing: antialiased;
+        font-weight: 400;
+        position: absolute;
+        top: 0.618em;
+        right: 1em;
+        animation: spin 2s linear infinite;
+      }
+    }
+
+    &.added::after {
+      font-family: 'WooCommerce';
+      content: '\e017';
+      margin-left: 0.53em;
+      vertical-align: bottom;
+    }
+
+    &:hover {
+      background-color: $secondary - #111;
+      text-decoration: none;
+      background-image: none;
+      color: $secondarytext;
+    }
+
+    &.alt {
+      background-color: $primary;
+      color: $primarytext;
+      -webkit-font-smoothing: antialiased;
+
+      &:hover {
+        background-color: $primary - #111;
+        color: $primarytext;
+      }
+
+      &.disabled,
+      &:disabled,
+      &:disabled[disabled],
+      &.disabled:hover,
+      &:disabled:hover,
+      &:disabled[disabled]:hover {
+        background-color: $medgrey;
+        color: $primarytext;
+      }
+    }
+
+    &:disabled,
+    &.disabled,
+    &:disabled[disabled] {
+      color: inherit;
+      cursor: not-allowed;
+      opacity: 0.5;
+      padding: 0.618em 1em;
+
+      &:hover {
+        color: inherit;
+        background-color: $secondary;
+      }
+    }
+  }
+
+  .cart .button,
+  .cart input.button {
+    float: none;
+  }
+
+  a.added_to_cart {
+    padding-top: 0.5em;
+    white-space: nowrap;
+    display: inline-block;
+  }
+
+  /**
+   * Reviews
+   */
+
+  /**
+   * Star ratings
+   */
+
+  /**
+   * Tables
+   */
+
+  /**
+   * Cart sidebar
+   */
+
+  &.widget_shopping_cart,
+  .widget_shopping_cart {
+    .total {
+      border-top: 3px double $secondary;
+    }
+  }
+
+  /**
+   * Forms
+   */
+  form .form-row {
+    &.woocommerce-invalid {
+      label {
+        color: $red;
+      }
+      .select2-container,
+      input.input-text,
+      select {
+        border-color: $red;
+      }
+    }
+
+    &.woocommerce-validated {
+      .select2-container,
+      input.input-text,
+      select {
+        border-color: $green - #111;
+      }
+    }
+  }
+
+  form.login,
+  form.checkout_coupon,
+  form.register {
+    border: 1px solid darken( $secondary, 10% );
+  }
+
+  /**
+   * Order page
+   */
+  ul.order_details {
+    li {
+      border-right: 1px dashed darken( $secondary, 10% );
+      &:last-of-type {
+        border: none;
+      }
+    }
+  }
+  .woocommerce-customer-details {
+    address {
+      border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  /**
+   * Layered nav widget
+   */
+  .woocommerce-widget-layered-nav-list {
+    .woocommerce-widget-layered-nav-list__item--chosen a::before {
+      color: $red;
+    }
+  }
+
+  .widget_layered_nav_filters ul {
+    li {
+      a {
+        &::before {
+          color: $red;
+        }
+      }
+    }
+  }
+
+  /**
+   * Price filter widget
+   */
+  .widget_price_filter {
+    .ui-slider .ui-slider-handle {
+      background-color: $primary;
+    }
+
+    .ui-slider .ui-slider-range {
+      background-color: $primary;
+    }
+
+    .price_slider_wrapper .ui-widget-content {
+      background-color: $primary - #444;
+    }
+  }
+
+  /**
+   * Rating Filter Widget
+   */
+}
+
+.woocommerce-message {
+  border-top-color: $green;
+
+  &::before {
+    color: $green;
+  }
+}
+
+.woocommerce-info {
+  border-top-color: $blue;
+
+  &::before {
+    color: $blue;
+  }
+}
+
+.woocommerce-error {
+  border-top-color: $red;
+
+  &::before {
+    color: $red;
+  }
+}
+
+/**
+ * Account page
+ */
+
+/**
+ * Cart/checkout page
+ */
+.woocommerce-cart,
+.woocommerce-checkout,
+#add_payment_method {
+  table.cart {
+    td.actions .coupon .input-text {
+      border: 1px solid darken( $secondary, 10% );
+    }
+  }
+
+  .cart-collaterals {
+    .cart_totals {
+      table {
+        small {
+          color: $subtext;
+        }
+      }
+      .discount td {
+        color: $highlight;
+      }
+
+      tr td,
+      tr th {
+        border-top: 1px solid $secondary;
+      }
+    }
+  }
+  .checkout {
+    .create-account small {
+      font-size: 11px;
+      color: $subtext;
+      font-weight: normal;
+    }
+  }
+
+  #payment {
+    background: $secondary;
+
+    ul.payment_methods {
+      border-bottom: 1px solid darken( $secondary, 10% );
+    }
+    div.payment_box {
+      background-color: darken( $secondary, 5% );
+      color: $secondarytext;
+
+      input.input-text, textarea {
+        border-color: darken( $secondary, 15% );
+        border-top-color: darken( $secondary, 20% );
+      }
+
+      ::-webkit-input-placeholder {
+        color: darken( $secondary, 20% );
+      }
+
+      :-moz-placeholder {
+        color: darken( $secondary, 20% );
+      }
+
+      :-ms-input-placeholder {
+        color: darken( $secondary, 20% );
+      }
+      span.help {
+        font-size: 0.857em;
+        color: $subtext;
+        font-weight: normal;
+      }
+      &::before {
+        border: 1em solid darken( $secondary, 5% ); /* arrow size / color */
+        border-right-color: transparent;
+        border-left-color: transparent;
+        border-top-color: transparent;
+      }
+    }
+  }
+}
+
+.woocommerce-terms-and-conditions {
+  border: 1px solid rgba(0,0,0,.2);
+  box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
+  background: rgba(0,0,0,.05);
+}
+
+/**
+ * Password strength meter
+ */
+
+
+
+@media only screen and (min-width: 768px) {
+  .woocommerce, .woocommerce-page {
+    ul.products {
+      li.product {
+        width: 29%;
+      }
+    }
+  }
+}
