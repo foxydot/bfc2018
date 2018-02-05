@@ -30,7 +30,7 @@ function msdlab_add_styles() {
             global $wp_styles;
             $wp_styles->add_data( 'ie8-style', 'conditional', 'lte IE 8' );
         }
-        wp_enqueue_style('msd-woo-style',get_stylesheet_directory_uri().'/lib/css/woocommerce.css',array('woocommerce-general','woocommerce-layout'));
+        wp_enqueue_style('msd-woo-style',get_stylesheet_directory_uri().'/lib/css/woocommerce.css',array('woocommerce-general','woocommerce-layout','yith-wc-style-frontend-fontawesome-tickets'));
     }
 }
 
