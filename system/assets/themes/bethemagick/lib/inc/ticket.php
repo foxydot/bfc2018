@@ -33,7 +33,8 @@ if(!class_exists('MSDLab_tickets')){
             add_action('yith_wcevti_custom_field',array(&$this,'custom_field_frontend'),10,4);
 
             //woocommerce
-            //remove_all_actions('woocommerce_after_single_product_summary');woocommerce_output_product_data_tabs
+
+            remove_action('woocommerce_single_product_summary','woocommerce_template_single_meta',40);
             remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_product_data_tabs', 15 );
             remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20 );
 
