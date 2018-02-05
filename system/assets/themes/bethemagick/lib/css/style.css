@@ -2027,11 +2027,11 @@ woocommerce-page input.button.alt {
   color: #000;
   font-size: 1em; }
 
-section.related.products {
+section.upsells.products {
   clear: both; }
 
 @media only screen and (min-width: 768px) {
-  .woocommerce ul.products li.product, woocommerce-page ul.products li.product {
+  .woocommerce ul.products li.product, .woocommerce-page ul.products li.product {
     width: 29%; } }
 
 .site-header > .container {

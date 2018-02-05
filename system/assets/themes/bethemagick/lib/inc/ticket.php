@@ -33,7 +33,10 @@ if(!class_exists('MSDLab_tickets')){
             add_action('yith_wcevti_custom_field',array(&$this,'custom_field_frontend'),10,4);
 
             //woocommerce
-            //remove_all_actions('woocommerce_after_single_product_summary');
+            //remove_all_actions('woocommerce_after_single_product_summary');woocommerce_output_product_data_tabs
+            remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_product_data_tabs', 15 );
+            remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20 );
+
             add_filter('woocommerce_sale_flash',array(&$this,'edit_sale_text'),10,3);
             add_filter('loop_shop_columns', array(&$this,'loop_columns'),15);
             add_action('woocommerce_before_add_to_cart_button', array(&$this,'medical_form_button'),99);

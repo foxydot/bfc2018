@@ -25,6 +25,6 @@ if(!function_exists('my_msdlab_trace_actions')) {
     {
         global $wp_filter;
         global $allowedposttags;
-        ts_var($wp_filter['woocommerce_single_product_summary']);
+        ts_var($wp_filter['woocommerce_after_single_product_summary']);
     }
 }
