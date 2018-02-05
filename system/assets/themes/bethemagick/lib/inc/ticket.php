@@ -69,7 +69,6 @@ if(!class_exists('MSDLab_tickets')){
         }
 
         function custom_field_frontend($field, $index, $row, $label){
-            ts_data($label);
             // any notice text
             switch($label){
                 case 'accomodations':
