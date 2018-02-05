@@ -11,7 +11,7 @@ function msdlab_add_styles() {
     global $is_IE;
     if(!is_admin()){
         //use cdn
-        wp_enqueue_style('bootstrap-style','//maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css',false,'4.5.0');
+        wp_enqueue_style('bootstrap-style','//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css',false,'4.5.0');
         wp_enqueue_style('font-awesome-style','//maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css',false,'4.5.0');
         //use local
         // wp_enqueue_style('font-awesome-style',get_stylesheet_directory_uri().'/lib/font-awesome/css/font-awesome.css',array('bootstrap-style'));
@@ -30,6 +30,7 @@ function msdlab_add_styles() {
             global $wp_styles;
             $wp_styles->add_data( 'ie8-style', 'conditional', 'lte IE 8' );
         }
+        wp_enqueue_style('msd-woo-style',get_stylesheet_directory_uri().'/lib/css/woocommerce.css',array('woocommerce-general','woocommerce-layout'));
     }
 }
 

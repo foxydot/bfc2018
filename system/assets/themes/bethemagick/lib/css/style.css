@@ -1980,60 +1980,6 @@ p.entry-meta {
       max-width: 700px;
       margin: 0 auto 1em; }
 
-.woocommerce ul.products, woocommerce-page ul.products {
-  list-style: none outside none; }
-  .woocommerce ul.products li.product, woocommerce-page ul.products li.product {
-    width: 100%;
-    text-align: center; }
-
-.woocommerce span.onsale, woocommerce-page span.onsale {
-  background-color: #f00; }
-
-.woocommerce li.product p.price, .woocommerce li.product span.price, .woocommerce div.product p.price, .woocommerce div.product span.price,
-.woocommerce #content li.product p.price,
-.woocommerce #content li.product span.price, .woocommerce #content div.product p.price, .woocommerce #content div.product span.price, woocommerce-page li.product p.price, woocommerce-page li.product span.price, woocommerce-page div.product p.price, woocommerce-page div.product span.price,
-woocommerce-page #content li.product p.price,
-woocommerce-page #content li.product span.price, woocommerce-page #content div.product p.price, woocommerce-page #content div.product span.price {
-  color: #000; }
-
-.woocommerce li.product div.images, .woocommerce div.product div.images,
-.woocommerce #content li.product div.images, .woocommerce #content div.product div.images, woocommerce-page li.product div.images, woocommerce-page div.product div.images,
-woocommerce-page #content li.product div.images, woocommerce-page #content div.product div.images {
-  width: 29%; }
-
-.woocommerce li.product div.summary, .woocommerce div.product div.summary,
-.woocommerce #content li.product div.summary, .woocommerce #content div.product div.summary, woocommerce-page li.product div.summary, woocommerce-page div.product div.summary,
-woocommerce-page #content li.product div.summary, woocommerce-page #content div.product div.summary {
-  width: 67%; }
-
-.woocommerce #respond input#submit.alt,
-.woocommerce a.button.alt,
-.woocommerce button.button.alt,
-.woocommerce input.button.alt, woocommerce-page #respond input#submit.alt,
-woocommerce-page a.button.alt,
-woocommerce-page button.button.alt,
-woocommerce-page input.button.alt {
-  background-color: #f00; }
-  .woocommerce #respond input#submit.alt:hover,
-  .woocommerce a.button.alt:hover,
-  .woocommerce button.button.alt:hover,
-  .woocommerce input.button.alt:hover, woocommerce-page #respond input#submit.alt:hover,
-  woocommerce-page a.button.alt:hover,
-  woocommerce-page button.button.alt:hover,
-  woocommerce-page input.button.alt:hover {
-    background-color: rgba(255, 0, 0, 0.8); }
-
-.label {
-  color: #000;
-  font-size: 1em; }
-
-section.upsells.products {
-  clear: both; }
-
-@media only screen and (min-width: 768px) {
-  .woocommerce ul.products li.product, .woocommerce-page ul.products li.product {
-    width: 29%; } }
-
 .site-header > .container {
   position: relative; }
 
@@ -2113,6 +2059,12 @@ i.fa {
 
 .archive-description {
   display: none; }
+
+.medical-form-notice {
+  font-size: 1.2em;
+  font-weight: 800;
+  color: #f00;
+  text-decoration: underline; }
 
 @media only screen and (min-width: 768px) {
   /* Accessible Menu

@@ -42,6 +42,7 @@ if(!class_exists('MSDLab_tickets')){
             add_filter('loop_shop_columns', array(&$this,'loop_columns'),15);
             add_action('woocommerce_before_add_to_cart_button', array(&$this,'medical_form_button'),99);
             add_action('genesis_header', array(&$this,'medical_form_header'),99);
+            add_filter('wc_add_to_cart_message_html', array(&$this,'id10t_proof_add_to_cart_message' ), 10, 2);
 
             //gravity forms
         }
@@ -111,7 +112,7 @@ if(!class_exists('MSDLab_tickets')){
         function medical_form_button(){
             global $post;
             if(has_term( 17, 'product_cat', $post )){
-                print '<div class="medical-form-notice">You must fill out a medical form with each registration.</div>';
+                print '<div class="medical-form-notice">You must fill out a medical release form with each registration.</div>';
                 print '<a class="button alt medical-form-trigger">Medical Release</a>';
             }
         }
@@ -152,8 +153,31 @@ jQuery(document).ready(function($) {
                 }
             }
         }
+
+
+        function id10t_proof_add_to_cart_message($message,$products){
+            global $woocommerce;
+            //get all products
+
+            $products = array(
+                'child' => array('note'=>'Child registration','ID'=>162),
+                'minor' => array('note'=>'Minor registration','ID'=>160),
+                'adult' => array('note'=>'Adult registration','ID'=>149),
+                'tshirt' => array('note'=>'Teeshirt(s)','ID'=>200),
+                'donate' => array('note'=>'Make a donation','ID'=>215),
+            );
+            foreach($products AS $product){
+                $button[] = '<a href="'.get_the_permalink($product['ID']).'" class="button">'.$product['note'].'</a>';
+            }
+            $buttons = '<div><h3>Would you like to add:</h3>'.implode("\n",$button).'</div>';
+            $message = $message.$buttons;
+            return $message;
+        }
+
+
         //util
     }
+
 
 }
 
