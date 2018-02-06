@@ -42,6 +42,15 @@ if(!class_exists('MSDLab_tickets')){
             '12 Man',
             'My tent is a mansion I can fit armies in.'
         );
+
+        private $degree_in_BFC = array(
+            'Not applicable/Guest',
+            'Dedicant',
+            'First Degree',
+            'Second Degree',
+            'Third Degree',
+            'Clan Head',
+        );
         //construct
         function __construct() {
             add_action('yith_wcevti_custom_option',array(&$this,'add_select'),10,2);
