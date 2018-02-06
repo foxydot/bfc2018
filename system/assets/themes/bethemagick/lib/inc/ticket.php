@@ -43,7 +43,7 @@ if(!class_exists('MSDLab_tickets')){
             'My tent is a mansion I can fit armies in.'
         );
 
-        private $degree_in_BFC = array(
+        private $degree_in_bfc = array(
             'Not applicable/Guest',
             'Dedicant',
             'First Degree',
