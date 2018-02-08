@@ -62,4 +62,11 @@ jQuery(document).ready(function($) {
         $('#login-modal').modal('toggle');
     });
 
+	$('#_fields_customer_0_confirm-email').blur(function() {
+        email = $(this).parents('p.form-field').prev('p.form-field').find('input[type=email]');
+        if ($(this).val() != email.val()) {
+            alert('Email address does not match. Please check!');
+        }
+    });
+
 });

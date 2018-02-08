@@ -39,6 +39,10 @@ define( 'CHILD_THEME_URL', 'http://msdlab.com/' );
 define( 'CHILD_THEME_VERSION', '2.3.0' );
 
 
+function woocommerce_setup_genesis() {
+    woocommerce_content();
+}
+add_theme_support( 'woocommerce' );
 // Enqueue stuff.
 include_once( get_stylesheet_directory() . '/lib/inc/register-scripts.php' );
 
