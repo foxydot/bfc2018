@@ -59,7 +59,8 @@ if(!class_exists('MSDLab_tickets')){
             //woocommerce
 
             remove_action('woocommerce_single_product_summary','woocommerce_template_single_meta',40);
-            remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_product_data_tabs', 15 );
+            remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_product_data_tabs', 10 );
+            remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_upsell_display', 15 );
             remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20 );
 
             add_filter('woocommerce_sale_flash',array(&$this,'edit_sale_text'),10,3);
@@ -183,7 +184,9 @@ jQuery(document).ready(function($) {
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->';
                     print $modal;
-                }
+                } /*elseif($post->ID == 200) {
+                    print '<div class="denial-overlay">You must register before purchasing tee shirts.</div>';
+                }*/
             }
         }
 
@@ -197,7 +200,7 @@ jQuery(document).ready(function($) {
                 'minor' => array('note'=>'Minor registration','ID'=>160),
                 'adult' => array('note'=>'Adult registration','ID'=>149),
                 'tshirt' => array('note'=>'Teeshirt(s)','ID'=>200),
-                'donate' => array('note'=>'Make a donation','ID'=>215),
+                //'donate' => array('note'=>'Make a donation','ID'=>215),
             );
             foreach($products AS $product){
                 $button[] = '<a href="'.get_the_permalink($product['ID']).'" class="button">'.$product['note'].'</a>';
