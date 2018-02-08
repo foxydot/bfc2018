@@ -146,7 +146,7 @@ if(!class_exists('MSDLab_tickets')){
         function medical_form_button(){
             global $post;
             if(has_term( 17, 'product_cat', $post )){
-                print '<div class="medical-form-notice medical-form-trigger">You must fill out a medical release form with each registration.</div>';
+                print '<div class="medical-form-notice medical-form-trigger">You must fill out a medical release form to complete registration.</div>';
                 print '<a class="button alt medical-form-trigger">Medical Release</a>';
             }
         }
