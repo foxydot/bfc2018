@@ -194,7 +194,7 @@ jQuery(document).ready(function($) {
         function id10t_proof_add_to_cart_message($message,$products){
             global $woocommerce;
             //get all products
-
+            $message = preg_replace('/View Cart/i','Go to Checkout',$message);
             $products = array(
                 'child' => array('note'=>'Child registration','ID'=>162),
                 'minor' => array('note'=>'Minor registration','ID'=>160),
