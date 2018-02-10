@@ -148,29 +148,34 @@ if(!class_exists('MSDLab_tickets')){
             $the_query = new WP_Query( $args );
             // The Loop
             if ( $the_query->have_posts() ) {
+                $titles = array(
+                    'Ticket ID',
+                    'Order ID',
+                    'Registration Type',
+                    'Registration Date',
+                    'Attendee Legal Name',
+                    'Attendee Magical Name',
+                    'Contact Email',
+                    'Clan',
+                    'Coven',
+                    'BFC Member',
+                    'Degree',
+                    'Accomodations',
+                    'Tent Size',
+                    'RV Site',
+                    'Electric',
+                    'Birthdate',
+                    'Guardian',
+                    'Relationship',
+                    'Guests',
+                    'Tshirts',
+                );
                 $hdr = '<tr>
-    <th>Ticket ID</th>
-    <th>Order ID</th>
-    <th>Registration Type</th>
-    <th>Registration Date</th>
-    <th>Attendee Legal Name</th>
-    <th>Attendee Magical Name</th>
-    <th>Contact Email</th>
-    <th>Clan</th>
-    <th>Coven</th>
-    <th>BFC Member</th>
-    <th>Degree</th>
-    <th>Accomodations</th>
-    <th>Tent Size</th>
-    <th>RV Site</th>
-    <th>Electric</th>
-    <th>Birthdate</th>
-    <th>Guardian</th>
-    <th>Relationship</th>
-    <th>Guests</th>
-    <th>Tshirts</th>
+<th>'.implode("</th>\n<th>",$titles).'</th>
 </tr>';
-                $csvhdr = '"Ticket ID","Order ID","Registration Type","Registration Date","Attendee Legal Name","Attendee Magical Name","Contact Email","Clan","Coven","BFC Member","Degree","Accomodations","Tent Size","RV Site","Electric","Birthdate","Guardian","Relationship","Guests","TShirts"';
+                foreach($titles AS $title){
+                    $csvhdr .= '"'.$title.'",';
+                }
 
                 $ret = $csvret = array();
                 $i = 0;
@@ -181,52 +186,37 @@ if(!class_exists('MSDLab_tickets')){
                     }
                     $the_query->the_post();
                     $meta               = get_post_meta($post->ID);
-
-                    $ticket_id          = $post->ID;
-                    $order_id           = $meta['wc_order_id'][0];
-                    $registration_type  = $this->get_sku_from_id($meta['wc_event_id'][0]);
-                    $registration_date  = date("M d, Y",strtotime($post->post_date));
-                    $attendee_legal_name = $meta['_field_Legal Name'][0];
-                    $attendee_magical_name = $meta['_field_Magickal Name'][0];
-                    $contact_email      = $meta['_field_Email'][0];
-                    $clan               = $meta['_field_Clan Name'][0];
-                    $coven              = $meta['_field_Coven Name'][0];
-                    $member             = $meta['_field_BFC Member?'][0];
-                    $degree             = $meta['_field_Degree in BFC'][0];
-                    $accomodations      = $meta['_field_Accomodations'][0];
-                    $tentsize           = $meta['_field_Tent Size'][0];
-                    $sitenumber         = $meta['_field_RV/Popup Site Number'][0];
-                    $electric           = $meta['_field_Do you or your guests require electricity for medical reasons?'][0];
-                    $birthdate          = $meta['_field_Birthdate'][0];
-                    $guardian           = $meta['_field_Attending Guardian Name'][0] . '<br />' . $meta['_field_Attending Guardian Email'][0];
-                    $relationship       = $meta['_field_Relationship to member'][0];
-                    $guests             = $meta['_field_Names of guests (please register separately)'][0];
-                    $tshirts            = $this->tshirts_to_include($order_id,$orders_to_ignore);
-                    $ret[] = '<tr>
-<td>'.$ticket_id.'</td>
-<td>'.$order_id.'</td>
-<td>'.$registration_type.'</td>
-<td>'.$registration_date.'</td>
-<td>'.$attendee_legal_name.'</td>
-<td>'.$attendee_magical_name.'</td>
-<td>'.$contact_email.'</td>
-<td>'.$clan.'</td>
-<td>'.$coven.'</td>
-<td>'.$member.'</td>
-<td>'.$degree.'</td>
-<td>'.$accomodations.'</td>
-<td>'.$tentsize.'</td>
-<td>'.$sitenumber.'</td>
-<td>'.$electric.'</td>
-<td>'.$birthdate.'</td>
-<td>'.$guardian.'</td>
-<td>'.$relationship.'</td>
-<td>'.$guests.'</td>
-<td>'.$tshirts.'</td>
-</tr>';
-                    $csvret[] = '"'.$ticket_id.'","'.$order_id.'","'.$registration_type.'","'.$registration_date.'","'.$attendee_legal_name.'","'.$attendee_magical_name.'","'.$contact_email.'","'.$clan.'","'.$coven.'","'.$member.'","'.$degree.'","'.$accomodations.'","'.$tentsize.'","'.$sitenumber.'","'.$electric.'","'.$birthdate.'","'.preg_replace('@<br />@i',': ',$guardian).'","'.$relationship.'","'.$guests.'","'.$this->csv_safe($tshirts).'"';
+                    $fields = array(
+                        'ticket_id'          => $post->ID,
+                        'order_id'           => $meta['wc_order_id'][0],
+                        'registration_type'  => $this->get_sku_from_id($meta['wc_event_id'][0]),
+                        'registration_date'  => date("M d, Y",strtotime($post->post_date)),
+                        'attendee_legal_name' => $meta['_field_Legal Name'][0],
+                        'attendee_magical_name' => $meta['_field_Magickal Name'][0],
+                        'contact_email'      => $meta['_field_Email'][0],
+                        'clan'               => $meta['_field_Clan Name'][0],
+                        'coven'              => $meta['_field_Coven Name'][0],
+                        'member'             => $meta['_field_BFC Member?'][0],
+                        'degree'             => $meta['_field_Degree in BFC'][0],
+                        'accomodations'      => $meta['_field_Accomodations'][0],
+                        'tentsize'           => $meta['_field_Tent Size'][0],
+                        'sitenumber'         => $meta['_field_RV/Popup Site Number'][0],
+                        'electric'           => $meta['_field_Do you or your guests require electricity for medical reasons?'][0],
+                        'birthdate'          => $meta['_field_Birthdate'][0],
+                        'guardian'           => $meta['_field_Attending Guardian Name'][0] . '<br />' . $meta['_field_Attending Guardian Email'][0],
+                        'relationship'       => $meta['_field_Relationship to member'][0],
+                        'guests'             => $meta['_field_Names of guests (please register separately)'][0],
+                        'tshirts'            => $this->tshirts_to_include($meta['wc_order_id'][0],$orders_to_ignore),
+                    );
+                    $row = $csvrow = array();
+                    foreach($fields AS $field){
+                        $row[] = '<td>'.$field.'</td>';
+                        $csvrow[] = '"'.$this->csv_safe($field).'"';
+                    }
+                    $ret[] = '<tr>'.implode("\n",$row).'</tr>';
+                    $csvret[] = implode(',',$csvrow);
                     $i++;
-                    $orders_to_ignore[] = $order_id;
+                    $orders_to_ignore[] = $meta['wc_order_id'][0];
                 }
                 $ret_str = implode("\n",$ret);
                 print '<table>'.$ret_str.'</table>';
@@ -349,7 +339,8 @@ jQuery(document).ready(function($) {
         //util
 
         public function csv_safe($value){
-            $value = preg_replace('%\'%i','-',$value);
+            $value = preg_replace('%\'%i','’',$value);
+            $value = preg_replace('%\"%i','“',$value);
             $value = strip_tags($value,'<p><a>');
             $value = preg_replace("/<a.+href=['|\"]([^\"\']*)['|\"].*>(.+)<\/a>/i",'\2 (\1)',$value);
             return $value;

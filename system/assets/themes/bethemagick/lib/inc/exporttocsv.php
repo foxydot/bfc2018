@@ -23,7 +23,7 @@ if (isset($_POST['csv_output'])) {
 $filename = $file."_".date("Y-m-d_H-i",time());
 
 //Generate the CSV file header
-header("Content-type: application/vnd.ms-excel");
+header("Content-type: application/csv;charset=UTF-8");
 header("Content-disposition: csv" . date("Y-m-d") . ".csv");
 header("Content-disposition: filename=".$filename.".csv");
 
