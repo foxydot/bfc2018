@@ -168,11 +168,13 @@ if(!class_exists('MSDLab_tickets')){
     <th>Guardian</th>
     <th>Relationship</th>
     <th>Guests</th>
+    <th>Tshirts</th>
 </tr>';
-                $csvhdr = '"Ticket ID","Order ID","Registration Type","Registration Date","Attendee Legal Name","Attendee Magical Name","Contact Email","Clan","Coven","BFC Member","Degree","Accomodations","Tent Size","RV Site","Electric","Birthdate","Guardian","Relationship","Guests"';
+                $csvhdr = '"Ticket ID","Order ID","Registration Type","Registration Date","Attendee Legal Name","Attendee Magical Name","Contact Email","Clan","Coven","BFC Member","Degree","Accomodations","Tent Size","RV Site","Electric","Birthdate","Guardian","Relationship","Guests","TShirts"';
 
-                $ret = array();
+                $ret = $csvret = array();
                 $i = 0;
+                $orders_to_ignore = array();
                 while ( $the_query->have_posts() ) {
                     if($i%20 == 0){
                         $ret[] = $hdr;
@@ -199,6 +201,7 @@ if(!class_exists('MSDLab_tickets')){
                     $guardian           = $meta['_field_Attending Guardian Name'][0] . '<br />' . $meta['_field_Attending Guardian Email'][0];
                     $relationship       = $meta['_field_Relationship to member'][0];
                     $guests             = $meta['_field_Names of guests (please register separately)'][0];
+                    $tshirts            = $this->tshirts_to_include($order_id,$orders_to_ignore);
                     $ret[] = '<tr>
 <td>'.$ticket_id.'</td>
 <td>'.$order_id.'</td>
@@ -219,9 +222,11 @@ if(!class_exists('MSDLab_tickets')){
 <td>'.$guardian.'</td>
 <td>'.$relationship.'</td>
 <td>'.$guests.'</td>
+<td>'.$tshirts.'</td>
 </tr>';
-                    $csvret[] = '"'.$ticket_id.'","'.$order_id.'","'.$registration_type.'","'.$registration_date.'","'.$attendee_legal_name.'","'.$attendee_magical_name.'","'.$contact_email.'","'.$clan.'","'.$coven.'","'.$member.'","'.$degree.'","'.$accomodations.'","'.$tentsize.'","'.$sitenumber.'","'.$electric.'","'.$birthdate.'","'.preg_replace('@<br />@i',': ',$guardian).'","'.$relationship.'","'.$guests.'"';
+                    $csvret[] = '"'.$ticket_id.'","'.$order_id.'","'.$registration_type.'","'.$registration_date.'","'.$attendee_legal_name.'","'.$attendee_magical_name.'","'.$contact_email.'","'.$clan.'","'.$coven.'","'.$member.'","'.$degree.'","'.$accomodations.'","'.$tentsize.'","'.$sitenumber.'","'.$electric.'","'.$birthdate.'","'.preg_replace('@<br />@i',': ',$guardian).'","'.$relationship.'","'.$guests.'","'.$this->csv_safe($tshirts).'"';
                     $i++;
+                    $orders_to_ignore[] = $order_id;
                 }
                 $ret_str = implode("\n",$ret);
                 print '<table>'.$ret_str.'</table>';
@@ -243,6 +248,22 @@ th,td {border: 1px solid #ccc;border-collapse: collapse;padding: 0.3em;}
         function get_sku_from_id($product_id){
             $sku = get_post_meta($product_id,'_sku',true);
             return $sku;
+        }
+
+        function tshirts_to_include($order_id,$orders_to_ignore){
+            if(in_array($order_id,$orders_to_ignore)){return 'with another registration';}
+            $order = wc_get_order( $order_id );
+            // Iterating through each "line" items in the order
+            foreach ($order->get_items() as $item_id => $item_data) {
+                // Get an instance of corresponding the WC_Product object
+                $product = $item_data->get_product();
+                $product_name = $product->get_name(); // Get the product name
+                if(!stripos($product_name,'Tee')){continue;}
+                $product_name = str_replace('Clan Camp 2018 Tee Shirt - ','',$product_name);
+                $item_quantity = $item_data->get_quantity(); // Get the item quantity
+                $ret[] = $product_name .' Qty: ' . $item_quantity;
+                }
+            return implode(" | ",$ret);
         }
 
 //woocommerce stuff
@@ -326,6 +347,13 @@ jQuery(document).ready(function($) {
 
 
         //util
+
+        public function csv_safe($value){
+            $value = preg_replace('%\'%i','-',$value);
+            $value = strip_tags($value,'<p><a>');
+            $value = preg_replace("/<a.+href=['|\"]([^\"\']*)['|\"].*>(.+)<\/a>/i",'\2 (\1)',$value);
+            return $value;
+        }
     }
 
 
