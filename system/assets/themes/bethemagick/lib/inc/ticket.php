@@ -143,6 +143,7 @@ if(!class_exists('MSDLab_tickets')){
             global $wpdb,$post;
             $args = array(
                 'post_type' => 'ticket',
+                'posts_per_page' => -1,
             );
             // The Query
             $the_query = new WP_Query( $args );
@@ -186,9 +187,12 @@ if(!class_exists('MSDLab_tickets')){
                     }
                     $the_query->the_post();
                     $meta               = get_post_meta($post->ID);
+                    $order_id           = $meta['wc_order_id'][0];
+                    $order              = new WC_Order($order_id);
+                    if(!in_array($order->get_status(),array('processing','completed'))){continue;}
                     $fields = array(
                         'ticket_id'          => $post->ID,
-                        'order_id'           => $meta['wc_order_id'][0],
+                        'order_id'           => $order_id,
                         'registration_type'  => $this->get_sku_from_id($meta['wc_event_id'][0]),
                         'registration_date'  => date("M d, Y",strtotime($post->post_date)),
                         'attendee_legal_name' => $meta['_field_Legal Name'][0],
@@ -206,7 +210,7 @@ if(!class_exists('MSDLab_tickets')){
                         'guardian'           => $meta['_field_Attending Guardian Name'][0] . '<br />' . $meta['_field_Attending Guardian Email'][0],
                         'relationship'       => $meta['_field_Relationship to member'][0],
                         'guests'             => $meta['_field_Names of guests (please register separately)'][0],
-                        'tshirts'            => $this->tshirts_to_include($meta['wc_order_id'][0],$orders_to_ignore),
+                        'tshirts'            => $this->tshirts_to_include($order_id,$orders_to_ignore),
                     );
                     $row = $csvrow = array();
                     foreach($fields AS $field){
