@@ -227,7 +227,7 @@ if(!class_exists('MSDLab_tickets')){
                     $orders_to_ignore[] = $meta['wc_order_id'][0];
                 }
                 $ret_str = implode("\n",$ret);
-                print '<table class="sortable">'.$ret_str.'</table>';
+                print '<table class="table table-bordered sortable">'.$ret_str.'</table>';
                 print '<style>
 th,td {border: 1px solid #ccc;border-collapse: collapse;padding: 0.3em;}
 </style>';
@@ -333,7 +333,7 @@ th,td {border: 1px solid #ccc;border-collapse: collapse;padding: 0.3em;}
                     $i++;
                 }
                 $ret_str = implode("\n",$ret);
-                print '<table class="sortable">'.$ret_str.'</table>';
+                print '<table class="table table-bordered sortable">'.$hdr.$ret_str.'</table>';
                 print '<style>
 th,td {border: 1px solid #ccc;border-collapse: collapse;padding: 0.3em;}
 </style>';
@@ -461,9 +461,9 @@ jQuery(document).ready(function($) {
                 'registrations',
                 'tshirts'
             );
-            if(in_array($current_screen->id,$allowedpages)){
-                wp_enqueue_script('sorttable',plugin_dir_url(__DIR__).'/../js/sorttable.js');
-            }
+            //if(in_array($current_screen->id,$allowedpages)){
+                wp_enqueue_script('sorttable',get_stylesheet_directory_uri().'/lib/js/sorttable.js');
+            //}
         }
     }
 
