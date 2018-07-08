@@ -70,6 +70,8 @@ if(!class_exists('MSDLab_tickets')){
             add_action('woocommerce_before_add_to_cart_button', array(&$this,'medical_form_button'),99);
             add_action('genesis_header', array(&$this,'medical_form_header'),99);
             add_filter('wc_add_to_cart_message_html', array(&$this,'id10t_proof_add_to_cart_message' ), 10, 2);
+            add_action('admin_enqueue_scripts', array(&$this,'add_admin_styles_and_scripts'));
+
 
             //gravity forms
         }
@@ -84,7 +86,7 @@ if(!class_exists('MSDLab_tickets')){
             ?>
 <p class="form-field _fields_customer_<?php echo $label; ?>_field ">
 
-                        <?php if (!$placeholder){ ?>
+<?php if (!$placeholder){ ?>
     <label
         for="_fields_customer_<?php echo $row ?>_<?php echo $label; ?>"><?php echo $field['_label']; ?><?php if (isset($field['_required'])) {
             if ('on' == $field['_required']) {
@@ -101,7 +103,8 @@ if(!class_exists('MSDLab_tickets')){
 <select class="_field_item" style=""
        name="_fields_customer[<?php echo $row ?>][<?php echo $index ?>][_value]"
        id="_fields_customer_<?php echo $row ?>_<?php echo $label; ?>"
-       placeholder="<?php if ($placeholder){echo $field['_label'];} ?>" <?php if (isset($field['_required'])) {
+       placeholder="<?php if ($placeholder){echo $field['_label'];} ?>"
+    <?php if (isset($field['_required'])) {
     if ('on' == $field['_required']) {
         echo 'required';
     }
@@ -111,7 +114,7 @@ if(!class_exists('MSDLab_tickets')){
     ?>
 </select>
 </p>
-            <?
+            <?php
             // any notice text
             switch($label){
                 case 'accomodations':
@@ -137,6 +140,7 @@ if(!class_exists('MSDLab_tickets')){
 
         function settings_page(){
             add_menu_page(__('Registrations'),__('Registrations'),'administrator','registrations', array(&$this,'registration_report'));
+            add_submenu_page('registrations',__('TeeShirts'),__('TeeShirts'),'administrator','tshirts', array(&$this,'tshirt_report'));
         }
 
         function registration_report(){
@@ -223,7 +227,7 @@ if(!class_exists('MSDLab_tickets')){
                     $orders_to_ignore[] = $meta['wc_order_id'][0];
                 }
                 $ret_str = implode("\n",$ret);
-                print '<table>'.$ret_str.'</table>';
+                print '<table class="sortable">'.$ret_str.'</table>';
                 print '<style>
 th,td {border: 1px solid #ccc;border-collapse: collapse;padding: 0.3em;}
 </style>';
@@ -237,6 +241,107 @@ th,td {border: 1px solid #ccc;border-collapse: collapse;padding: 0.3em;}
             } else {
                 // no posts found
             }
+        }
+
+        /**
+         * Get All orders IDs for a given product ID.
+         *
+         * @param  integer  $product_id (required)
+         * @param  array    $order_status (optional) Default is 'wc-completed'
+         *
+         * @return array
+         */
+        function get_order_item_ids_by_product_id( $product_id, $order_status = array( 'wc-completed', 'wc-processing', 'wc-on-hold' ) ){
+            global $wpdb;
+
+            $results = $wpdb->get_col("
+        SELECT order_items.order_item_id
+        FROM {$wpdb->prefix}woocommerce_order_items as order_items
+        LEFT JOIN {$wpdb->prefix}woocommerce_order_itemmeta as order_item_meta ON order_items.order_item_id = order_item_meta.order_item_id
+        LEFT JOIN {$wpdb->posts} AS posts ON order_items.order_id = posts.ID
+        WHERE posts.post_type = 'shop_order'
+        AND posts.post_status IN ( '" . implode( "','", $order_status ) . "' )
+        AND order_items.order_item_type = 'line_item'
+        AND order_item_meta.meta_key = '_product_id'
+        AND order_item_meta.meta_value = '$product_id'
+    ");
+
+            return $results;
+        }
+
+        function get_orders_by_product_id($product_id){
+            global $wpdb;
+
+            $orders = array();
+            $order_ids = $this->get_order_item_ids_by_product_id($product_id);
+            foreach($order_ids AS $order_id){
+                $order = $wpdb->get_results("
+        SELECT order_item_meta.meta_key,order_item_meta.meta_value
+        FROM {$wpdb->prefix}woocommerce_order_itemmeta as order_item_meta
+        WHERE order_item_meta.order_item_id = '".$order_id."' 
+        AND (order_item_meta.meta_key = '_qty' OR order_item_meta.meta_key = 'pa_size');
+    ");
+                foreach($order AS $meta){
+                    $orders[$order_id][$meta->meta_key] = $meta->meta_value;
+                }
+            }
+            return $orders;
+        }
+
+        function tshirt_report(){
+            global $wpdb,$post;
+            $orders = $this->get_orders_by_product_id(200);
+            $totals = array(
+                'mens-small' => 0,
+                'mens-medium' => 0,
+                'mens-large' => 0,
+                'large' => 0,
+                'mens-x-large' => 0,
+                'mens-2x' => 0,
+                'mens-3x' => 0,
+                'womens-medium' => 0,
+                'womens-large' => 0,
+                'womens-x-large' => 0,
+                'womens-2x' => 0,
+            );
+            foreach ($orders AS $order){
+                $totals[$order['pa_size']] += $order['_qty'];
+            }
+            // The Loop
+                $titles = array(
+                    'Size',
+                    'Quantity',
+                );
+                $hdr = '<tr>
+<th>'.implode("</th>\n<th>",$titles).'</th>
+</tr>';
+                foreach($titles AS $title){
+                    $csvhdr .= '"'.$title.'",';
+                }
+
+                $ret = $csvret = array();
+                $i = 0;
+                $orders_to_ignore = array();
+                foreach($totals AS $size => $qty) {
+                    $row = $csvrow = array();
+                    $row[] = '<td>'.$size.'</td>';
+                    $csvrow[] = '"'.$this->csv_safe($size).'"';
+                    $row[] = '<td>'.$qty.'</td>';
+                    $csvrow[] = '"'.$this->csv_safe($qty).'"';
+                    $ret[] = '<tr>'.implode("\n",$row).'</tr>';
+                    $csvret[] = implode(',',$csvrow);
+                    $i++;
+                }
+                $ret_str = implode("\n",$ret);
+                print '<table class="sortable">'.$ret_str.'</table>';
+                print '<style>
+th,td {border: 1px solid #ccc;border-collapse: collapse;padding: 0.3em;}
+</style>';
+                print '<form name="tshirt_export" action="'.get_stylesheet_directory_uri().'/lib/inc/exporttocsv.php" method="post">
+        <input type="submit" value="Export table to CSV">
+        <input type="hidden" value="Tshirt Report" name="csv_hdr">
+        <input type="hidden" value=\''.$csvhdr."\n".implode("\n",$csvret).'\' name="csv_output">
+        </form>';
         }
 
         function get_sku_from_id($product_id){
@@ -348,6 +453,17 @@ jQuery(document).ready(function($) {
             $value = strip_tags($value,'<p><a>');
             $value = preg_replace("/<a.+href=['|\"]([^\"\']*)['|\"].*>(.+)<\/a>/i",'\2 (\1)',$value);
             return $value;
+        }
+
+        function add_admin_styles_and_scripts(){
+            global $current_screen;
+            $allowedpages = array(
+                'registrations',
+                'tshirts'
+            );
+            if(in_array($current_screen->id,$allowedpages)){
+                wp_enqueue_script('sorttable',plugin_dir_url(__DIR__).'/../js/sorttable.js');
+            }
         }
     }
 
