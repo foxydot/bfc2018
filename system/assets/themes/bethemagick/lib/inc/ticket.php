@@ -140,7 +140,7 @@ if(!class_exists('MSDLab_tickets')){
 
         function settings_page(){
             add_menu_page(__('Registrations'),__('Registrations'),'administrator','registrations', array(&$this,'registration_report'));
-            add_submenu_page('registrations',__('TeeShirts'),__('TeeShirts'),'administrator','tshirts', array(&$this,'tshirt_report'));
+            add_submenu_page('registrations',__('TeeShirts'),__('TeeShirts'),'administrator','tshirts', array(&$this,'tshirt_report2'));
         }
 
         function registration_report(){
@@ -308,9 +308,60 @@ th,td {border: 1px solid #ccc;border-collapse: collapse;padding: 0.3em;}
                 $totals[$order['pa_size']] += $order['_qty'];
             }
             // The Loop
+            $titles = array(
+                'Size',
+                'Quantity',
+            );
+            $hdr = '<tr>
+<th>'.implode("</th>\n<th>",$titles).'</th>
+</tr>';
+            foreach($titles AS $title){
+                $csvhdr .= '"'.$title.'",';
+            }
+
+            $ret = $csvret = array();
+            $i = 0;
+            $orders_to_ignore = array();
+            foreach($totals AS $size => $qty) {
+                $row = $csvrow = array();
+                $row[] = '<td>'.$size.'</td>';
+                $csvrow[] = '"'.$this->csv_safe($size).'"';
+                $row[] = '<td>'.$qty.'</td>';
+                $csvrow[] = '"'.$this->csv_safe($qty).'"';
+                $ret[] = '<tr>'.implode("\n",$row).'</tr>';
+                $csvret[] = implode(',',$csvrow);
+                $i++;
+            }
+            $ret_str = implode("\n",$ret);
+            print '<table class="table table-bordered sortable">'.$hdr.$ret_str.'</table>';
+            print '<style>
+th,td {border: 1px solid #ccc;border-collapse: collapse;padding: 0.3em;}
+</style>';
+            print '<form name="tshirt_export" action="'.get_stylesheet_directory_uri().'/lib/inc/exporttocsv.php" method="post">
+        <input type="submit" value="Export table to CSV">
+        <input type="hidden" value="Tshirt Report" name="csv_hdr">
+        <input type="hidden" value=\''.$csvhdr."\n".implode("\n",$csvret).'\' name="csv_output">
+        </form>';
+        }
+
+
+        function tshirt_report2(){
+            global $wpdb,$post;
+            $args = array(
+                'post_type' => 'shop_order',
+                'posts_per_page' => -1,
+                'post_status' => array('wc-processing','wc-complete'),
+            );
+            // The Query
+            $the_query = new WP_Query( $args );
+            // The Loop
+            if ( $the_query->have_posts() ) {
                 $titles = array(
-                    'Size',
-                    'Quantity',
+                    'Order ID',
+                    'Checkout Name',
+                    'Contact Email',
+                    'Clan',
+                    'Full Order',
                 );
                 $hdr = '<tr>
 <th>'.implode("</th>\n<th>",$titles).'</th>
@@ -321,27 +372,60 @@ th,td {border: 1px solid #ccc;border-collapse: collapse;padding: 0.3em;}
 
                 $ret = $csvret = array();
                 $i = 0;
-                $orders_to_ignore = array();
-                foreach($totals AS $size => $qty) {
+                while ( $the_query->have_posts() ) {
+                    if($i%20 == 0){
+                        $ret[] = $hdr;
+                    }
+                    $clan = false;
+                    $order_items = array();
+                    $the_query->the_post();
+                    $order              = wc_get_order( $post->ID );
+                    $o = 0;
+                    foreach ($order->get_items() as $item_id => $item_data) {
+                        // Get an instance of corresponding the WC_Product object
+                        $product = $item_data->get_product();
+                        $product_name = $product->get_name(); // Get the product name
+                        $item_quantity = $item_data->get_quantity(); // Get the item quantity
+                        $order_items[$o] = $product_name .' Qty: ' . $item_quantity;
+                        if(stripos($product_name,'Adult')){
+                            $order_items[$o] = $product_name .': ' . $item_data->get_meta('_field_Legal Name');
+                            if(!$clan) {
+                                $clan = $item_data->get_meta('_field_Clan Name');
+                            }
+                        }
+                        $o++;
+                    }
+                    $fields = array(
+                        'ticket_id'          => $post->ID,
+                        'checkout_name'      => $order->get_billing_last_name() . ', ' . $order->get_billing_first_name(),
+                        'contact_email'      => $order->get_billing_email(),
+                        'clan'               => $clan,
+                        'tshirts'            => implode("<br>\n",$order_items),
+                    );
                     $row = $csvrow = array();
-                    $row[] = '<td>'.$size.'</td>';
-                    $csvrow[] = '"'.$this->csv_safe($size).'"';
-                    $row[] = '<td>'.$qty.'</td>';
-                    $csvrow[] = '"'.$this->csv_safe($qty).'"';
+                    foreach($fields AS $field){
+                        $row[] = '<td>'.$field.'</td>';
+                        $csvrow[] = '"'.$this->csv_safe($field).'"';
+                    }
                     $ret[] = '<tr>'.implode("\n",$row).'</tr>';
                     $csvret[] = implode(',',$csvrow);
                     $i++;
                 }
                 $ret_str = implode("\n",$ret);
-                print '<table class="table table-bordered sortable">'.$hdr.$ret_str.'</table>';
+                print '<table class="table table-bordered sortable">'.$ret_str.'</table>';
                 print '<style>
 th,td {border: 1px solid #ccc;border-collapse: collapse;padding: 0.3em;}
 </style>';
-                print '<form name="tshirt_export" action="'.get_stylesheet_directory_uri().'/lib/inc/exporttocsv.php" method="post">
+                print '<form name="registration_export" action="'.get_stylesheet_directory_uri().'/lib/inc/exporttocsv.php" method="post">
         <input type="submit" value="Export table to CSV">
-        <input type="hidden" value="Tshirt Report" name="csv_hdr">
+        <input type="hidden" value="Registration Report" name="csv_hdr">
         <input type="hidden" value=\''.$csvhdr."\n".implode("\n",$csvret).'\' name="csv_output">
         </form>';
+                /* Restore original Post Data */
+                wp_reset_postdata();
+            } else {
+                // no posts found
+            }
         }
 
         function get_sku_from_id($product_id){
