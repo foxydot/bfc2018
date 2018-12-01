@@ -1,0 +1,89 @@
+.fixed .column-post_id{
+  width: 10%;
+}
+.msdlab_meta{
+  ul {
+    li {
+      &:after {
+        content: ".";
+        display: block;
+        clear: both;
+        visibility: hidden;
+        line-height: 0;
+        height: 0;
+      }
+    }
+  }
+  .description{
+    display: none;
+  }
+  span{
+    display: block;
+    color: #999;
+  }
+  label{
+    display: block;
+    font-weight: bold;
+    margin: 0 1% 0 0;
+    float: left;
+    width: 14%;
+    text-align: right;
+    cursor: default;
+    line-height: 2;
+    span{
+      display: inline;
+      font-weight: normal;
+    }
+  }
+  input[type="text"],
+  input[type="password"],
+  input[type="color"],
+  input[type="date"],
+  input[type="datetime"],
+  input[type="datetime-local"],
+  input[type="email"],
+  input[type="month"],
+  input[type="number"],
+  input[type="range"],
+  input[type="tel"],
+  input[type="time"],
+  input[type="url"],
+  input[type="week"],
+  select,
+  textarea,
+  .input_container{
+    width: 85%;
+    float: left;
+  }
+  /* Tables
+--------------------------------------------- */
+
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    line-height: 2;
+    margin-bottom: 40px;
+    margin-bottom: 4rem;
+    width: 100%;
+  }
+
+  tbody {
+    border-bottom: 1px solid #ddd;
+  }
+
+  th,
+  td {
+    text-align: left;
+  }
+
+  th {
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  td {
+    border-top: 1px solid #ddd;
+    padding: 6px 0;
+    padding: 0.6rem 0;
+  }
+}
